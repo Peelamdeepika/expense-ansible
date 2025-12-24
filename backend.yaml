@@ -13,7 +13,12 @@
       name: nodejs
       state: present 
 
-      
+  - name: Create a user 'johnd' with a home directory
+    ansible.builtin.user:
+      name: expense  
 
-
+  - name: creating app directory
+    ansible.builtin.file:
+      path: /app    #it means in / directory with app name we are creating directory
+      state: directory
       
