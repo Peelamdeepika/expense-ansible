@@ -16,7 +16,7 @@
       state: started
       enabled: yes
 
-  - name: installing python libraries
+  - name: installing python libraries   #to connect mysql we need these libraries (shown error while executing)
     ansible.builtin.pip:
       name: "{{ item }}"
       executable: pip3.9
@@ -24,17 +24,17 @@
       - PyMySQL
       - cryptography
       
-  - name: connecting to mysql  
+  - name: connecting to mysql  #to check are we able to connect or not by this info
     community.mysql.mysql_info:
       login_user: root
       login_password: "{{ mysql_pass }}"
-    register: mysql_info  
-    ignore_errors: true
+    register: mysql_info  #keyword to save output on mysql_info
+    ignore_errors: true  #even this output is erro it will continue next task as ignoring error
 
   - name: saving above info
     ansible.builtin.debug:
      msg: "output is {{ mysql_info }}"  
 
-  - name: setting root login_password
+  - name: setting root login_password  
     ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1"
     when: mysql_info.failed is true
