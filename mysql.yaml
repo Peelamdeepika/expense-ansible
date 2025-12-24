@@ -15,18 +15,21 @@
       state: started
       enabled: yes  
 
-  - name: installing pymysql
+  - name: installing libraries  #to connect mysql we need these libraries
     ansible.builtin.pip:
-     name: "PyMySQL"   
+     name: "{{ item}}"
      executable: pip3.9
+    loop:
+      -PyMySQL
+      -cryptography
+             
 
-
-  - name: Collect all info
+  - name: Collect all info  # just checking are we able to connect to mysql based on these details
     community.mysql.mysql_info:
       login_user: root
       login_password: "{{ mysql_pass }}"
-    register: mysql_info  
-    ignore_errors: true
+    register: mysql_info   # to store output of above
+    ignore_errors: true  #it will ignore error so that it willprocess next task
 
   - name: saving above info
     ansible.builtin.debug:
