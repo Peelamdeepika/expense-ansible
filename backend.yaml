@@ -22,3 +22,7 @@
       path: /app    #it means in / directory with app name we are creating directory
       state: directory
       
+  - name: downloading application url
+    ansible.builtin.get_url:
+     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+     dest: /tmp/backend.zip
