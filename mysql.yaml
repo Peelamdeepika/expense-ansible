@@ -1,6 +1,8 @@
 - name: confirguring my sql server
   hosts: mysql
   become: yes
+  vars:
+    mysql_pass: "ExpenseApp@1"
   tasks:
   - name: installing mysql server
     ansible.builtin.package:
@@ -11,4 +13,16 @@
     ansible.builtin.service:
       name: mysqld
       state: started
-      enabled: yes    
+      enabled: yes  
+
+  - name: Collect all info
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{ mysql_pass }}"
+    register: mysql_info  
+    ignore_errors: true
+
+  - name: saving above info
+    ansible.builtin.debug:
+     msg: "{{ mysql_info }}"
+          
