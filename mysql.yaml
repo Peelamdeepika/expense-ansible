@@ -18,10 +18,10 @@
   - name: installing libraries  #to connect mysql we need these libraries
     ansible.builtin.pip:
      name: "{{ item}}"
-     executable: pip3.9
+     executable: pip3.9   #our python is in this version so giving this
     loop:
-      -PyMySQL
-      -cryptography
+      - PyMySQL  
+      - cryptography 
              
 
   - name: Collect all info  # just checking are we able to connect to mysql based on these details
