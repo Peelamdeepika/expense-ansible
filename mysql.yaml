@@ -1,41 +1,40 @@
-- name: confirguring my sql server
+- name: configuring mysql
   hosts: mysql
   become: yes
   vars:
-    mysql_pass: "ExpenseApp@1"
+   mysql_pass: "ExpenseApp@1"
+
   tasks:
   - name: installing mysql server
     ansible.builtin.package:
-      name: mysql-server
-      state: present
+     name: mysql-server
+     state: present
 
-  - name: starting mysqld service
+  - name: starting and enabiling the mysqld
     ansible.builtin.service:
       name: mysqld
       state: started
-      enabled: yes  
+      enabled: yes
 
-  - name: installing libraries  #to connect mysql we need these libraries
+  - name: installing python libraries
     ansible.builtin.pip:
-     name: "{{ item}}"
-     executable: pip3.9   #our python is in this version so giving this
+      name: "{{ item }}"
+      executable: pip3.9
     loop:
-      - PyMySQL  
-      - cryptography 
-             
-
-  - name: Collect all info  # just checking are we able to connect to mysql based on these details
+      - PyMySQL
+      - cryptography
+      
+  - name: connecting to mysql  
     community.mysql.mysql_info:
       login_user: root
       login_password: "{{ mysql_pass }}"
-    register: mysql_info   # to store output of above
-    ignore_errors: true  #it will ignore error so that it willprocess next task
+    register: mysql_info  
+    ignore_errors: true
 
   - name: saving above info
     ansible.builtin.debug:
-     msg: "{{ mysql_info }}"
+     msg: "output is {{ mysql_info }}"  
 
-  - name: creating root login_password
-    ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1" 
-    when: mysql_info.failed is true  
-          
+  - name: setting root login_password
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1"
+    when: mysql_info.failed is true
