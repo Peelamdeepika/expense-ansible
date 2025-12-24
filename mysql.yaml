@@ -18,7 +18,8 @@
   - name: installing pymysql
     ansible.builtin.pip:
      name: "PyMySQL"   
-     state: present
+     executable: pip3.13
+
 
   - name: Collect all info
     community.mysql.mysql_info:
