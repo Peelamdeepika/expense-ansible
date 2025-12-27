@@ -2,11 +2,11 @@
   hosts: backend
   become: yes
   tasks: 
-  - name: disabling node js
-    ansible.builtin.command: dnf module disable nodejs -y
+  # - name: disabling node js
+  #   ansible.builtin.command: dnf module disable nodejs -y
 
-  - name: enable node js 
-    ansible.builtin.command: dnf module enable nodejs:20 -y
+  # - name: enable node js 
+  #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
   - name: installing node js
     ansible.builtin.package:
@@ -33,10 +33,10 @@
      dest: /app
      remote_src: yes
 
-  # - name: Install npm package
-  #   community.general.npm:
-  #    name: npm
-  #    path: /app
+  - name: Install npm package
+    community.general.npm:
+     name: npm
+     path: /app
 
   # - name: Copy file with owner and permissions
   #   ansible.builtin.copy:
