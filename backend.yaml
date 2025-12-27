@@ -27,17 +27,17 @@
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /tmp/backend.zip
 
-  - name: Unarchive a file that is already on the remote machine
-    ansible.builtin.unarchive:
-     src: /tmp
-     dest: /app
+  # - name: Unarchive a file that is already on the remote machine
+  #   ansible.builtin.unarchive:
+  #    src: /tmp
+  #    dest: /app
 
-  - name: Install npm package
-  community.general.npm:
-    name: npm
-    path: /app
+  # - name: Install npm package
+  # community.general.npm:
+  #   name: npm
+  #   path: /app
 
-  - name: Copy file with owner and permissions
-    ansible.builtin.copy:
-      src: backend.service
-      dest: /etc/systemd/system/backend.service 
+  # - name: Copy file with owner and permissions
+  #   ansible.builtin.copy:
+  #     src: backend.service
+  #     dest: /etc/systemd/system/backend.service 
