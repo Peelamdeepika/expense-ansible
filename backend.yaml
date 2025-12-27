@@ -11,10 +11,6 @@
   - name: Add MySQL community repo
     ansible.builtin.command: dnf install -y https://repo.mysql.com/mysql80-community-release-el9-1.noarch.rpm
 
-
-  - name: Enable MySQL module
-    ansible.builtin.command: dnf module enable mysql:8.0 -y
-
   - name: installing node js
     ansible.builtin.dnf:
       name: "{{ item }}"
