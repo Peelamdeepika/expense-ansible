@@ -8,16 +8,21 @@
   # - name: enable node js 
   #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
+  - name: Add MySQL community repo
+     ansible.builtin.command: >
+      dnf install -y https://repo.mysql.com/mysql80-community-release-el9-1.noarch.rpm
+
+
   - name: Enable MySQL module
     ansible.builtin.command: dnf module enable mysql:8.0 -y
 
   - name: installing node js
-    ansible.builtin.package:
+    ansible.builtin.dnf:
       name: "{{ item }}"
       state: present
     loop:  
     - nodejs
-    - mysql-server
+    - mysql-community-server
 
   - name: Create a user 
     ansible.builtin.user:
