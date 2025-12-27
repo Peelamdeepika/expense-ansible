@@ -8,6 +8,9 @@
   # - name: enable node js 
   #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
+  - name: Enable MySQL module
+    ansible.builtin.command: dnf module enable mysql -y
+
   - name: installing node js
     ansible.builtin.package:
       name: "{{ item }}"
