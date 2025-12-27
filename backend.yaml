@@ -14,7 +14,7 @@
       state: present
     loop:  
     - nodejs
-    - mysql
+    - mysql-server
 
   - name: Create a user 
     ansible.builtin.user:
@@ -46,7 +46,7 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service 
 
-  # - name: connecting to db
+  # - name: connecting to db and running script which is in schema
   #   community.mysql.mysql_db:
   #    state: import
   #    name: all 
@@ -54,9 +54,9 @@
   #    login_password: ExpenseApp@1
   #    target: /app/schema/backend.sql
 
-  # - name: restarting daemon 
+  # - name: daemon and services restart 
   #   ansible.builtin.systemd_service:
   #    enabled: true
-  #    name: daemon
+  #    name: backend
   #    state: restarted
   #    daemon_reload: true
