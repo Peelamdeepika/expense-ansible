@@ -1,12 +1,12 @@
 - name: configuring backend
-  hosts: 172.31.7.37
+  hosts: backend
   become: yes
   tasks: 
-  - name: disabling node js
-    ansible.builtin.command: dnf module disable nodejs -y
+  # - name: disabling node js
+  #   ansible.builtin.command: dnf module disable nodejs -y
 
-  - name: enable node js 
-    ansible.builtin.command: dnf module enable nodejs:20 -y
+  # - name: enable node js 
+  #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
 
   - name: Install NodeJS
@@ -14,10 +14,10 @@
      name: nodejs
      state: present
 
-  - name: Make sure PyMySQL is present
-    ansible.builtin.package:
-     name: MySQL
-     state: present
+  # - name: Make sure PyMySQL is present
+  #   ansible.builtin.package:
+  #    name: MySQL
+  #    state: present
 
 
   - name: Create a user 
