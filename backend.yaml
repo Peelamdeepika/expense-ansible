@@ -1,36 +1,14 @@
 - name: configuring backend
   hosts: backend
-  become: yes
-  tasks:
-  - name: disabling default nodejs
+  connection: yes
+  tasks: 
+  - name: disabling node js
     ansible.builtin.command: dnf module disable nodejs -y
 
-  - name : enabling nodejs 20
-    ansible.builtin.command: dnf module enable nodejs:20 -y  
+  - name: enable node js 
+    ansible.builtin.enable: dnf module enable nodejs:20 -y
 
-  - name: installing nodejs
+  - name: installing node js
     ansible.builtin.package:
-      name: nodejs
-      state: present 
-
-  - name: Create a user 'johnd' with a home directory
-    ansible.builtin.user:
-      name: expense  
-
-  - name: creating app directory
-    ansible.builtin.file:
-      path: /app    #it means in / directory with app name we are creating directory
-      state: directory
-      
-  - name: downloading application url
-    ansible.builtin.get_url:
-     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-     dest: /tmp/backend.zip
-
-  - name: Unzipping a file that is already on the remote machine (backend server)
-    ansible.builtin.unarchive:
-     src: /tmp/backend.zip
-     dest: /app
-     remote_src: yes
-
-  
+     name: nodejs
+     state: present
