@@ -8,16 +8,15 @@
   # - name: enable node js 
   #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
-  - name: Add MySQL community repo
-    ansible.builtin.command: dnf install -y https://repo.mysql.com/mysql80-community-release-el9-1.noarch.rpm
+  - name: Configure MySQL Community repo
+    ansible.builtin.yum_repository:
+     name: mysql80-community
+     description: MySQL 8.0 Community Server
+    baseurl: https://repo.mysql.com/yum/mysql-8.0-community/el/9/x86_64/
+    gpgcheck: yes
+    gpgkey: https://repo.mysql.com/RPM-GPG-KEY-mysql
+    enabled: yes
 
-  - name: Import MySQL GPG key
-    ansible.builtin.rpm_key:
-     key: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-     state: present
-
-  - name: Clean dnf cache
-    ansible.builtin.command: dnf clean all
 
   - name: installing node js
     ansible.builtin.dnf:
@@ -52,7 +51,7 @@
      name: npm
      path: /app
 
-  - name: Copy file with owner and permissions
+  - name: Copy file 
     ansible.builtin.copy:
       src: backend.service
       dest: /etc/systemd/system/backend.service 
