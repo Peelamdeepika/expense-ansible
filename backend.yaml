@@ -9,8 +9,7 @@
   #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
   - name: Add MySQL community repo
-     ansible.builtin.command: >
-      dnf install -y https://repo.mysql.com/mysql80-community-release-el9-1.noarch.rpm
+     ansible.builtin.command: >dnf install -y https://repo.mysql.com/mysql80-community-release-el9-1.noarch.rpm
 
 
   - name: Enable MySQL module
