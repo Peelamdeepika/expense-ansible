@@ -8,15 +8,11 @@
   # - name: enable node js 
   #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
-  - name: Configure MySQL Community repo
-  ansible.builtin.yum_repository:
-    name: mysql80-community
-    description: MySQL 8.0 Community Server
-    baseurl: https://repo.mysql.com/yum/mysql-8.0-community/el/9/x86_64/
-    gpgcheck: yes
-    gpgkey: https://repo.mysql.com/RPM-GPG-KEY-mysql
-    enabled: yes
-
+  - name: Install MySQL server (skip GPG check)
+    ansible.builtin.dnf:
+     name: mysql-community-server
+     state: present
+    disable_gpg_check: yes
 
   - name: installing node js
     ansible.builtin.dnf:
