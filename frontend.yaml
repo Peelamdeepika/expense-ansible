@@ -1,6 +1,6 @@
 - name: configuring front end server
   hosts: front
-  connection: yes
+  become: yes
   tasks:
   - name: installing nginx
     ansible.builtin.package:
@@ -12,5 +12,4 @@
      name: nginx
      state: started
      enabled: yes
-     
-      
+
