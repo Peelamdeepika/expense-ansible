@@ -38,7 +38,7 @@
      name: npm
      path: /app
 
-  # - name: Copy file with owner and permissions
-  #   ansible.builtin.copy:
-  #     src: backend.service
-  #     dest: /etc/systemd/system/backend.service 
+  - name: Copy file with owner and permissions
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service 
