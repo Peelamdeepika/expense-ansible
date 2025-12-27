@@ -1,0 +1,16 @@
+- name: configuring front end server
+  hosts: front
+  connection: yes
+  tasks:
+  - name: installing nginx
+    ansible.builtin.package:
+     name: nginx
+     state: present
+
+  - name: enabling and starting nginx
+    ansible.builtin.service: 
+     name: nginx
+     state: started
+     enabled: yes
+     
+      
