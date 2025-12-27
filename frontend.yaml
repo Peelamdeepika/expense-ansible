@@ -17,5 +17,10 @@
     ansible.builtin.file:
      path: /usr/share/nginx/html/
      state: absent
+
+  - name: downloading front end content
+    ansible.builtin.get_url:
+     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+     path: /tmp/frontend.zip
      
 
