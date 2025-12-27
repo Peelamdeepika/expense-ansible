@@ -13,3 +13,9 @@
      state: started
      enabled: yes
 
+  - name: remove default content in html
+    ansible.builtin.file:
+     path: /usr/share/nginx/html/
+     state: absent
+     
+
