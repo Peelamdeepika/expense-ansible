@@ -10,7 +10,7 @@
   - name: enabling and starting nginx
     ansible.builtin.service: 
      name: nginx
-     state: started
+     state: restarted
      enabled: yes
 
   - name: remove default content in html
@@ -38,4 +38,6 @@
     ansible.builtin.copy:
      src: expense.conf
      dest: /etc/nginx/default.d
+
+  
 
