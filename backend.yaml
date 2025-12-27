@@ -12,15 +12,13 @@
     ansible.builtin.dnf:
      name: mysql-community-server
      state: present
-    disable_gpg_check: yes
+     disable_gpg_check: yes
 
-  - name: installing node js
-    ansible.builtin.dnf:
-      name: "{{ item }}"
-      state: present
-    loop:  
-    - nodejs
-    - mysql-community-server
+- name: Install NodeJS
+  ansible.builtin.dnf:
+    name: nodejs
+    state: present
+
 
   - name: Create a user 
     ansible.builtin.user:
