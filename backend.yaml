@@ -16,6 +16,9 @@
      key: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
      state: present
 
+  - name: Clean dnf cache
+    ansible.builtin.command: dnf clean all
+
   - name: installing node js
     ansible.builtin.dnf:
       name: "{{ item }}"
