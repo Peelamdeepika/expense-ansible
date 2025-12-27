@@ -10,8 +10,11 @@
 
   - name: installing node js
     ansible.builtin.package:
-     name: nodejs
-     state: present
+      name: "{{ item.name }}"
+      state: "{{ item.state}}"
+    loop:  
+     - nodejs
+     - mysql
 
   - name: Create a user 
     ansible.builtin.user:
@@ -43,9 +46,9 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service 
 
-  - name: restarting daemon 
-    ansible.builtin.systemd_service:
-     enabled: true
-     name: daemon
-     state: restarted
-     daemon_reload: true
+  # - name: restarting daemon 
+  #   ansible.builtin.systemd_service:
+  #    enabled: true
+  #    name: daemon
+  #    state: restarted
+  #    daemon_reload: true
