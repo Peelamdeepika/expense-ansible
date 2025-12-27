@@ -46,13 +46,13 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service 
 
-  - name: connecting to db
-    community.mysql.mysql_db:
-     state: import
-     name: all 
-     login_user: expense
-     login_password: ExpenseApp@1
-     target: /app/schema/backend.sql
+  # - name: connecting to db
+  #   community.mysql.mysql_db:
+  #    state: import
+  #    name: all 
+  #    login_user: expense
+  #    login_password: ExpenseApp@1
+  #    target: /app/schema/backend.sql
 
   # - name: restarting daemon 
   #   ansible.builtin.systemd_service:
