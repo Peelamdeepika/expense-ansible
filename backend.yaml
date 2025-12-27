@@ -8,16 +8,11 @@
   # - name: enable node js 
   #   ansible.builtin.command: dnf module enable nodejs:20 -y
 
-  - name: Install MySQL server (skip GPG check)
-    ansible.builtin.dnf:
-     name: mysql-community-server
-     state: present
-     disable_gpg_check: yes
 
-- name: Install NodeJS
-  ansible.builtin.dnf:
-    name: nodejs
-    state: present
+  - name: Install NodeJS
+    ansible.builtin.package:
+     name: nodejs
+     state: present
 
 
   - name: Create a user 
@@ -50,17 +45,17 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service 
 
-  # - name: connecting to db and running script which is in schema
-  #   community.mysql.mysql_db:
-  #    state: import
-  #    name: all 
-  #    login_user: expense
-  #    login_password: ExpenseApp@1
-  #    target: /app/schema/backend.sql
+  - name: connecting to db and running script which is in schema
+    community.mysql.mysql_db:
+     state: import
+     name: all 
+     login_user: expense
+     login_password: ExpenseApp@1
+     target: /app/schema/backend.sql
 
-  # - name: daemon and services restart 
-  #   ansible.builtin.systemd_service:
-  #    enabled: true
-  #    name: backend
-  #    state: restarted
-  #    daemon_reload: true
+  - name: daemon and services restart 
+    ansible.builtin.systemd_service:
+     enabled: true
+     name: backend
+     state: restarted
+     daemon_reload: true
