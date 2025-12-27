@@ -11,6 +11,11 @@
   - name: Add MySQL community repo
     ansible.builtin.command: dnf install -y https://repo.mysql.com/mysql80-community-release-el9-1.noarch.rpm
 
+  - name: Import MySQL GPG key
+    ansible.builtin.rpm_key:
+     key: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+     state: present
+
   - name: installing node js
     ansible.builtin.dnf:
       name: "{{ item }}"
