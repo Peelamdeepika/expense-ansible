@@ -7,11 +7,11 @@
      name: nginx
      state: present
 
-  - name: enabling and starting nginx
-    ansible.builtin.service: 
-     name: nginx
-     state: started
-     enabled: yes
+  # - name: enabling and starting nginx
+  #   ansible.builtin.service: 
+  #    name: nginx
+  #    state: started
+  #    enabled: yes
 
   - name: remove default content in html
     ansible.builtin.file:
