@@ -1,12 +1,12 @@
 - name: configuring backend
-  hosts: backend
+  hosts: 172.31.7.37
   become: yes
   tasks: 
-  # - name: disabling node js
-  #   ansible.builtin.command: dnf module disable nodejs -y
+  - name: disabling node js
+    ansible.builtin.command: dnf module disable nodejs -y
 
-  # - name: enable node js 
-  #   ansible.builtin.command: dnf module enable nodejs:20 -y
+  - name: enable node js 
+    ansible.builtin.command: dnf module enable nodejs:20 -y
 
 
   - name: Install NodeJS
@@ -15,8 +15,8 @@
      state: present
 
   - name: Make sure PyMySQL is present
-    ansible.builtin.pip:
-     name: PyMySQL
+    ansible.builtin.package:
+     name: MySQL
      state: present
 
 
@@ -54,7 +54,7 @@
     community.mysql.mysql_db:
      state: import
      name: all 
-     login_host: 172.31.27.25
+     login_host: 172.31.7.37
      login_user: expense
      login_password: "ExpenseApp@1"
      target: /app/schema/backend.sql
