@@ -33,10 +33,10 @@
      dest: /app
      remote_src: yes
 
-  - name: Install npm package
-    community.general.npm:
-     name: npm
-     path: /app
+  # - name: Install npm package
+  #   community.general.npm:
+  #    name: npm
+  #    path: /app
 
   # - name: Copy file with owner and permissions
   #   ansible.builtin.copy:
