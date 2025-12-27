@@ -54,9 +54,9 @@
     community.mysql.mysql_db:
      state: import
      name: all 
+     login_host: 172.31.27.25
      login_user: expense
      login_password: "ExpenseApp@1"
-     login_host: 172.31.27.25
      target: /app/schema/backend.sql
 
   - name: daemon and services restart 
