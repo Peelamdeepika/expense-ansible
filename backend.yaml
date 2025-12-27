@@ -23,6 +23,6 @@
      state: directory
 
   - name: Download file with check (md5)
-  ansible.builtin.get_url:
+    ansible.builtin.get_url:
     url: backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
     dest: /tmp
